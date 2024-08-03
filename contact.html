@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #platforms {
+        display: inline;
+        list-style-type: none;
+        width: 200px;
+        height: 500px;
+      }
+      #platforms li {
+        margin: 0 10px;
+        list-style-type: none;
+      }
+      body:hover {
+        cursor: pointer;
+        background-color: aqua;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Get in touch with us  -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>
+        Get in touch with us if you have any questions or queries concerning our
+        management
+      </p>
+      <!-- our platforms
+     -->
+      <ul id="platforms">
+        <li>
+          <a href="https://www.facebook.com/"
+            ><img src="/images/ff.gif" alt="" width="150px" />Facebook</a
+          >
+        </li>
+        <li>
+          <a href="https://www.instagram.com/"
+            ><img src="/images/i.gif" alt="" width="150px" />instagram</a
+          >
+        </li>
+        <li>
+          <a href="https://web.telegram.org/a/"
+            ><img src="/images/tel.gif" alt="" width="150px" />Telegram</a
+          >
+        </li>
+        <li>
+          <a href="https://www.tiktok.com/en/"
+            ><img src="/images/tk2.gif" alt="" width="150px" />Tiktok</a
+          >
+        </li>
+        <li>
+          <a href=""
+            ><img src="/images/tt.gif" alt="" width="150px" />Twitter</a
+          >
+        </li>
+        <li>
+          <a href="" onclick="message()">Send us your comment</a>
+        </li>
+        <li>
+          <textarea name="" id="" cols="30" rows="10">
+Message us directly</textarea
+          >
+        </li>
+        <input type="submit" />
+      </ul>
+    </section>
+    <script>
+      alert("Thank you surfing through our website ");
+      function message() {
+        alert("Thank you for getting in touch with us");
+        var q = prompt("input your comment");
+      }
+    </script>
+  </body>
+</html>

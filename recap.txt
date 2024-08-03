@@ -1,0 +1,445 @@
+w3resource
+Home
+JavaScript Home
+JavaScript Overview
+JavaScript and HTML Documents
+Writing first JavaScript program
+JS Values, variables, and literals
+JS alert(), prompt(), confirm()
+Read from and write to HTML Document
+JS Operators
+JS Statements
+JS Functions
+JS working with Objects
+JS Core objects, methods, properties
+JS Form validation
+JS Cookies
+JS Error handleing and Debugging
+JavaScript 1.5 Deprecated Features
+JavaScript Exercises
+JavaScript Cookies
+Last update on August 19 2022 21:51:08 (UTC/GMT +8 hours)
+
+Introduction
+JavaScript Cookies are a great way to save a user's preferences in his / her browser. This is useful for websites and users both, if not used to steal privacy.
+
+Contents:
+
+What are cookies and what cookies can do?
+What cookies cannot do?
+Setting cookies
+Create and delete cookies
+Cookies a real example
+What are cookies?
+
+A cookie is a small piece of text stored on the visitor's computer by a web browser. As the information is stored on the hard drive it can be accessed later, even after the computer is turned off.
+
+A cookie can be used for authenticating, session tracking, remember specific information about the user like his name, password, last visited date etc.
+
+As cookies as a simple piece of text they are not executable. In javaScript, we can create and retrieve cookie data with JavaScript's document object's cookie property.
+
+You can set a cookie setting document.cookie to a cookie string. Later we will discuss details how to create and retrieve a cookie.
+
+What cookies cannot do ?
+
+The first is that all modern browser support cookies, but the user can disable them. In IE, go to Tools and select Internet options, a window will come. Click on privacy and select advanced button, another new window will come, from here you can disable cookie.
+Cookies can identify the computer being used, not the individual.
+The most modern browser is expected to be able to store at least 300 cookies of four kilobytes (4 kb) per server or domain.
+For each domain and path, you can store upto 20 cookies.
+Cookies cannot access by any other computer except the visitor's computer that created the cookie.
+A website can set and read only its own cookies (for example, Yahoo can’t read IE's cookies).
+JavaScript: Setting Cookies
+
+cookies.txt :
+
+During the browsing session browser stores the cookies in memory, at the time of quitting they goto the file called cookies.txt. Different browser store cookies files in a different location in the disk.
+
+For example on windows 2000 firefox stores the cookies into C:\Documents and Settings\your_login_name_here\LocalSettings\ApplicationData\Mozilla\Firefox\Profiles\default .7g1\Cache. Note that the "default.7g1" folder name may vary depending on the version of Firefox you have Everytime When you open your browser, your cookies are read from the stored location and at the closing, your browser, cookies are reserved to disk. As a cookie expires it is no longer saved to the hard drive.
+
+
+There are six parts of a cookie : name, value, expires, path, domain, and security. The first two parts i.e. name and value are required and rest parts are optional.
+
+Syntax
+
+document.cookie="NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN; secure";
+The different components of the above syntax are discussed with a heading specifying the component.
+
+name and value
+
+The first part of the cookie string must have the name and value. The entire name/value must be a single string with no commas, semicolons or whitespace characters. Here is an example which stores the string "George" to a cookie named 'myName". The JavaScript statement is :
+
+document.cookie = "myName=George";
+Using encodeURIComponent() and decodeURIComponent() function.
+
+Using encodeURIComponent() function it is ensured that the cookie value string does not contain any commas, semicolons, or whitespace characters. which are not allowed in cookie values.
+
+encodeURIComponent("Good Morning");
+
+Returns the string as :
+
+Good%20Morning
+
+while decodeURIComponent("Good%20Morning") decode the string as :
+
+Good Morning.
+
+expires
+
+The cookie has a very limited lifespan. It will disappear when a user exits the browser. To give more life to the cookies you must set an expiration date in the following format.
+
+DD-Mon-YY HH:MM:SS GMT
+
+Here is an example where the cookie will live upto Mon, 12 Jun 2011:00:00:00 GMT
+
+document.cookie = "VisiterName=George; expires=Mon, 12 Jun 2011:00:00:00 GMT; ";
+
+In the above example we have written the date in the pages, but in real life, you can use the Date object to get the current date, and then set a cookie to expire six months or ten months.
+
+Here is the example
+
+cookieExpire = new Date();
+ cookieExpire.setMonth(cookieExpire.getMonth() + 10);
+document.cookie = "VisitorName=George; expires="+ expireDate.toGMTString() + ";";
+
+The above JavaScript code will create a new cookie called VisitorName with the value of 'George' and it will expire after 10 months from the current date.
+
+path
+
+If a page www.w3resource.com/javascript/ sets a cookie then all the pages in that directory (i.e. ../javascript) and its subdirectories will be able to read the cookie. But a page in www.w3resource/php/ directory can not read the cookie. Usually, the path is set to root level directory ( '/' ) , which means the cookie is available for all the pages of your site. If you want the cookie to be readable in a specific directory called php, add path=/php;.
+
+Here is the example where we have set a specific path called 'php'
+
+document.cookie= "VisiterName=George;expires=Mon,12Jun2011:00:00:00"
+  + ";path=/php;";
+  
+
+  
+In the following code here we have specified that the cookie is available to all subdirectories of the domain.
+
+document.cookie= "VisiterName=George;expires=Mon,12Jun2011:00:00:00"
+  + ";path=/;";
+  
+
+  
+domain
+
+Some websites have lots of domains. The purpose of the 'domain' is to allow cookies to other subdomains. For example a web portal call 'mysite'. It's main site is http://www.mysite.com with a matrimonial site (http://matimonial.mysite.com), a financial site (http://financial.mysite.com) and a travel site (http://travel.mysite.com). By default, if a web page on the travel site sets a cookie, pages on the financial site cannot read that cookie. But if you add domain = mysite to a cookie, all domain ending with 'mysite' can read the cookie. Note that the domain name must contain at least two dots (.), e.g., ".mysite.com"
+
+Here is the example.
+
+document.cookie= "VisiterName=George;expires=Mon,12Jun2011:00:00:00"
+  + ";path=/" + domain = mysite.com;"; 
+  
+
+  
+Secure
+
+The last part of the cookie string is the secure part which is a boolean value. The default value is false. If the cookie is marked secure (i.e. secure value is true) then the cookie will be sent to web server and try to retrieve it using a secure communication channel. This is applicable for those servers which have SSL (Secure Sockets Layer) facility.
+
+JavaScript: Creating Cookies
+
+We have already learned the various parts of the cookie like name, value, expires, path, domain, and security. Let's create a simple cookie.
+In the following example, we have written a function name 'CookieSet' and set some of its attributes.
+
+Example:
+
+In the following web document four parameters name, value, expires and path parts sent to the function 'CookieSet'. The secure and domain parts are not essential here. Empty values set to expires and path parts and there is a checking for expires and path parts. If expires receive empty value it will set the expires date 9 months from the current date and if path receives empty value then current directory and subdirectories will be the path. The toUTCString converts the date to a string, using the universal time convention.
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>JavaScript creating cookies - example1</title>
+</head>
+<body>
+<h1 style="color: 
+red">JavaScript creating cookies - example1</h1>
+<hr />
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+function CookieSet (cName, cValue, cPath, cExpires)
+{
+cvalue = encodeURIComponent(cValue);
+if (cExpires == "")
+{
+var cdate = new Date();
+cdate.setMonth(cdate.getMonth() + 9);
+cExpires = cdate.toUTCString();
+}
+if (cPath != "")
+{
+cPath = ";Path=" + cPath;
+}
+document.cookie = cName + "=" + cValue +"expires=" + cExpires + cPath;
+}
+CookieSet("Name","George ","","");
+alert(document.cookie)
+//]]>
+</script>
+</body>
+</html>
+
+View the example in the browser
+
+Example: Receive real data from the user and store it in a cookie.
+
+The following web document receives real data from the user and stores it in a cookie for next one year from the current date.
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>JavaScript creating cookies - receive real data. example1</title>
+</head>
+<body>
+<h1 style="color: 
+red">JavaScript creating cookies, receive real data. - example1</h1>
+<hr />
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+var visitor_name = prompt("What's your name?","");
+var expr_date = new Date("December 30, 2012");
+var cookie_date = expr_date.toUTCString();
+final_cookie = "Name =" + encodeURIComponent(visitor_name) + ";expires_on = " + cookie_date;
+document.cookie = final_cookie;
+alert(final_cookie); 
+//]]>
+</script>
+</body>
+</html>
+
+View the example in the browser
+
+Delete a cookie
+
+Deleting a cookie is extremely easy. To delete a cookie first accept the name of the cookie and create a cookie with the same name and set expiry date one day ago from the current date. As the expiry date has already passed the browser removes the cookie immediately. It is not confirmed that the cookie has deleted during the current session, some browser maintains the cookie until restart the browser. To see the example read A real example on Cookies page.
+
+JavaScript: Reading Cookies
+
+When a browser opens a web page, the browser reads the cookies (provided it has already stored it) that have stored on your machine. We used document.cookie to retrieve the information about the cookie.
+
+Example:
+
+In the following web document, we receive a name from the visitor and stored it in the cookie called "Name".
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>JavaScript creating cookies - receive real data. example1</title>
+</head>
+<body>
+<h1 style="color: 
+red">JavaScript creating cookies, receive real data. - example1</h1>
+<hr />
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+var visitor_name = prompt("What's your name?","");
+var curdate = new Date();
+curdate.setMonth(curdate.getMonth() + 6);
+var cookie_date  = curdate.toUTCString();
+final_cookie = "my_cookie=" + encodeURIComponent(visitor_name) + ";expires_on = " + cookie_date; 
+document.cookie = final_cookie;
+alert(final_cookie); 
+//]]>
+</script>
+</body>
+</html>
+
+View the example in the browser
+
+Example: Retrieves values from cookie
+
+In the following web document, we will read the stored cookie and retrieves its value.
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>JavaScript : Retrieve values from a cookie - example1</title>
+</head>
+<body>
+<h1 style="color: 
+red">JavaScript : Retrieve values from a cookie - example1</h1>
+<hr />
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+var search_cookie = "my_cookie" + "="
+if (document.cookie.length > 0) 
+{
+// Search for a cookie.
+offset = document.cookie.indexOf(search_cookie)
+if (offset != -1)
+{
+offset += search_cookie.length 
+// set index of beginning of value 
+end = document.cookie.indexOf(";",offset)
+if (end == -1) 
+{
+end = document.cookie.length
+}
+alert(decodeURIComponent(document.cookie.substring(offset, end)))
+}
+}
+//]]>
+</script>
+</head>
+</body>
+</html>
+
+View the example in the browser
+
+JavaScript: Cookies A Real Example
+
+In the following web document, if a visitor registered his name, his name will be displayed if he returns back to this page for the next nine months. When the visitor registered his name a cookie is stored in the visitor hard drive, to delete this cookie see the next example.
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>JavaScript Cookie</title>
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+function register(name)
+{
+var curdate = new Date();
+curdate.setMonth(curdate.getMonth() + 9);
+cookieExpires = curdate.toUTCString();
+final_cookie = "mycookie=" + encodeURIComponent(name) + ";expires_on = " + cookieExpires;
+document.cookie = final_cookie;
+}
+function getCookie(cookie_name)
+{
+var search_cookie = cookie_name + "="
+if (document.cookie.length > 0)
+{ 
+start_position = document.cookie.indexOf(search_cookie) 
+if (start_position!= -1)
+{
+start_position += search_cookie.length
+end_position = document.cookie.indexOf(";", start_position)
+if (end_position == -1) 
+end_position = document.cookie.length
+return (decodeURIComponent(document.cookie.substring(start_position, end_position)))
+}
+}
+}
+//]]>
+</script>
+</head>
+<body>
+<h1 style="color: 
+red">JavaScript Cookie</h1>
+<hr />
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+var username = getCookie("mycookie")
+if (username)
+{
+document.write("Welcome Back, ", username)
+}
+if (username == null)
+{
+document.write("You haven't been here in the last nine months...")
+document.write("When you return to this page in next nine months, ");
+document.write("your name will be displayed...with Welcome.");
+document.write('<form onsubmit = "return false">');
+document.write('<p>Enter your name: </p>');
+document.write('<input type="text" name="username" size="40">');
+document.write('<input type = "button" value= "Register"');
+document.write('onClick="register(this.form.username.value); history.go(0)">');
+document.write('</form>');
+}
+//]]>
+</script>
+</body>
+</html>
+
+View the example in the browser
+
+To delete the above cookie from your hard drive use the following web document.
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>JavaScript Cookie - example1</title>
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+function register(name)
+{
+var nowDate = new Date();
+nowDate.setMonth(nowDate.getMonth() + 9);
+cookieExpires = nowDate.toUTCString();
+final_cookie = "mycookie=" + encodeURIComponent(name) + ";expires_on = " + cookieExpires;
+document.cookie = final_cookie;
+}
+function getCookie(cookie_name)
+{
+var search_cookie = cookie_name + "="
+if (document.cookie.length > 0) 
+{ 
+start_position = document.cookie.indexOf(search_cookie)
+if (start_position!= -1)
+{
+start_position += search_cookie.length 
+end_position = document.cookie.indexOf(";", start_position)
+if (end_position == -1) 
+end_position = document.cookie.length
+return (decodeURIComponent(document.cookie.substring(start_position, end_position)))
+}
+}
+}
+//]]>
+</script>
+</head>
+<body>
+<h1 style="color: 
+red">JavaScript Cookie - example1</h1>
+<hr />
+<script type="text/javascript">
+//This is done to make the following JavaScript code compatible to XHTML. <![CDATA[
+var yourname = getCookie("mycookie")
+if (yourname)
+{
+document.write("Welcome Back, ", yourname)
+}
+if (yourname == null)
+{
+document.write("You haven't been here in the last nine months...")
+document.write("When you return to this page in next nine months, ");
+document.write("your name will be displayed...with Welcome.");
+document.write('<form onsubmit = "return false">');
+document.write('<p>Enter your name: </p>');
+document.write('<input type="text" name="username" size="40">');
+document.write('<input type = "button" value= "Register"');
+document.write('onClick="register(this.form.username.value); history.go(0)">');
+document.write('</form>');
+}
+//]]>
+</script>
+</body>
+</html>
+
+Click here to delete the cookie
+
+Previous: JavaScript: HTML Form - IP address validation
+Next: Debug JavaScript with Firebug
+
+Test your Programming skills with w3resource's quiz.
+
+﻿
+Follow us on Facebook and Twitter for latest update.
+
+Weekly Trends and Language Statistics
+Weekly Trends and Language Statistics
+Load Disqus Comments
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+©w3resource.com 2011-2024
+PrivacyAboutContactFeedbackAdvertise

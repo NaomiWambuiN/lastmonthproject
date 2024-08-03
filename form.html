@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* Add some basic styling to the form */
+    form {
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      border-color: #aaa;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  </style>
+
+  <body>
+    <form action="">
+      <fieldset>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" /><br /><br />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" /><br /><br />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" /><br /><br />
+      </fieldset>
+    </form>
+
+    <script>
+      const form = document.getElementById("myForm");
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let isValid = true;
+
+        if (nameInput.value.trim() === "") {
+          nameError.textContent = "Please enter your name";
+          isValid = false;
+        } else {
+          nameError.textContent = "";
+        }
+
+        if (emailInput.value.trim() === "") {
+          emailError.textContent = "Please enter your email";
+          isValid = false;
+        } else if (!validateEmail(emailInput.value)) {
+          emailError.textContent = "Please enter a valid email";
+          isValid = false;
+        } else {
+          emailError.textContent = "";
+        }
+
+        if (isValid) {
+          // Form is valid, submit it
+          form.submit();
+        }
+      });
+
+      function validateEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
+      }
+    </script>
+  </body>
+</html>
